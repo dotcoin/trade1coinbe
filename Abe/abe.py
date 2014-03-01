@@ -371,7 +371,7 @@ class Abe:
         return ret
 
     def get_default_chain(abe):
-        return abe.chain_lookup_by_name('Bitcoin')
+        return abe.chain_lookup_by_name('ArCoin')
 
     def call_handler(abe, page, cmd):
         handler = abe.get_handler(cmd)
