@@ -82,8 +82,9 @@ def parse_Transaction(vds, has_nTime=False):
   d = {}
   start_pos = vds.read_cursor
   d['version'] = vds.read_int32()
-  if has_nTime:
-    d['nTime'] = vds.read_uint32()
+  #if has_nTime:
+  d['nTime'] = vds.read_uint32()
+
   n_vin = vds.read_compact_size()
   d['txIn'] = []
   for i in xrange(n_vin):
@@ -186,6 +187,10 @@ def parse_BlockHeader(vds):
 def parse_Block(vds):
   d = parse_BlockHeader(vds)
   d['transactions'] = []
+
+  if (d['version'] & (1 << 8)) and d['version'] in (1, 3):
+    d['auxpow'] = parse_AuxPow(vds) 
+
 #  if d['version'] & (1 << 8):
 #    d['auxpow'] = parse_AuxPow(vds)
   nTransactions = vds.read_compact_size()

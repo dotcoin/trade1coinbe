@@ -149,7 +149,7 @@ class ArCoin(ArcChain):
         Chain.__init__(chain, **kwargs)
 
     datadir_conf_file_name = "arcoin.conf"
-    datadir_rpcport = 19336
+    datadir_rpcport = 8334
 
 class NovaCoin(NvcChain):
     def __init__(chain, **kwargs):
