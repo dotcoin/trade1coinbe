@@ -25,8 +25,8 @@ def create(policy, **kwargs):
         return NovaCoin(**kwargs)
     if policy == "CryptoCash":
         return CryptoCash(**kwargs)
-	if policy == "ArCoin":
-        return Arcoin(**kwargs)
+    if policy == "ArCoin":
+        return ArCoin(**kwargs)
     return Sha256NmcAuxPowChain(**kwargs)
 
 class Chain(object):
@@ -115,6 +115,10 @@ class LtcScryptChain(Chain):
         import ltc_scrypt
         return ltc_scrypt.getPoWHash(header)
 		
+class YacScryptChain(Chain):
+    def block_header_hash(chain, header):
+        import yac_scrypt
+        return yac_scrypt.getPoWHash(header)
 
 
 class PpcPosChain(Chain):
@@ -130,20 +134,12 @@ class NvcChain(LtcScryptChain, PpcPosChain):
     def has_feature(chain, feature):
         return feature == 'nvc_proof_of_stake'
 
-class ArcChain(Chain):
-    def block_header_hash(chain, header):
-        import yac_scrypt
-        return yac_scrypt.getPoWHash(header)
-		
-	def ds_parse_transaction(chain, ds):
-        return deserialize.parse_Transaction(ds, has_nTime=True)
 
-    def ds_parse_block(chain, ds):
-        d = Chain.ds_parse_block(chain, ds)
-        d['block_sig'] = ds.read_bytes(ds.read_compact_size())
-        return d
+class ArcChain(YacScryptChain, PpcPosChain):
+    def has_feature(chain, feature):
+        return feature == 'nvc_proof_of_stake'
 		
-class ArCoin(NvcChain):
+class ArCoin(ArcChain):
     def __init__(chain, **kwargs):
         chain.name = 'ArCoin'
         chain.code3 = 'ARC'

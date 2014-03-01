@@ -48,7 +48,7 @@ COPYRIGHT = "Abe developers"
 COPYRIGHT_URL = 'https://github.com/bitcoin-abe'
 
 DONATIONS_BTC = '1PWC7PNHL1SgvZaN7xEtygenKjWobWsCuf'
-DONATIONS_NMC = 'NJ3MSELK1cWnqUa6xhF2wUYAnz3RSrWXcK'
+DONATIONS_ARC = 'NJ3MSELK1cWnqUa6xhF2wUYAnz3RSrWXcK'
 
 TIME1970 = time.strptime('1970-01-01','%Y-%m-%d')
 EPOCH1970 = calendar.timegm(TIME1970)
@@ -80,7 +80,7 @@ DEFAULT_TEMPLATE = """
         %(download)s
         Tips appreciated!
         <a href="%(dotdot)saddress/%(DONATIONS_BTC)s">BTC</a>
-        <a href="%(dotdot)saddress/%(DONATIONS_NMC)s">NMC</a>
+        <a href="%(dotdot)saddress/%(DONATIONS_ARC)s">ARC</a>
     </p>
 </body>
 </html>

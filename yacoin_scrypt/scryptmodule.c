@@ -8,9 +8,10 @@
 //#include "scrypt.h"
 
 // yacoin: increasing Nfactor gradually
-const unsigned char minNfactor = 4;
-const unsigned char maxNfactor = 30;
-int nChainStartTime = 1367991200;
+const unsigned char minNfactor = 2;
+const unsigned char maxNfactor = 15;
+const unsigned char minNfactor2 = 9;
+int nChainStartTime = 1389784886;
 
 
 #define max(a,b)            (((a) > (b)) ? (a) : (b))
@@ -22,7 +23,7 @@ unsigned char GetNfactor(int nTimestamp) {
 	unsigned char N;
 
 	if (nTimestamp <= nChainStartTime)
-		return 4;
+		return 2;
 
 	s = nTimestamp - nChainStartTime;
 	while ((s >> 1) > 3) {
@@ -42,7 +43,7 @@ unsigned char GetNfactor(int nTimestamp) {
 	N = (unsigned char)n;
 	//printf("GetNfactor: %d -> %d %d : %d / %d\n", nTimestamp - nChainStartTime, l, s, n, min(max(N, minNfactor), maxNfactor));
 
-	return min(max(N, minNfactor), maxNfactor);
+	return min(max(N, minNfactor2), maxNfactor);
 }
 
 void scrypt_hash(const void* input, size_t inputlen, uint32_t *res, unsigned char Nfactor)
