@@ -116,9 +116,9 @@ class LtcScryptChain(Chain):
         return ltc_scrypt.getPoWHash(header)
 		
 class YacScryptChain(Chain):
-    def block_header_hash(chain, header):
-        import yac_scrypt
-        return yac_scrypt.getPoWHash(header)
+    def block_header_hash(chain,header):
+        
+        return util.scrypt(header)
 
 
 class PpcPosChain(Chain):
